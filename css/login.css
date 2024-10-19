@@ -1,0 +1,96 @@
+/* รูปโปรไฟล์ในรูปวงกลม */
+.circle-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.circle-image img {
+    width: 120%;
+    height: 120%;
+    object-fit: cover;
+}
+
+/* Sidebar styles */
+.sidebar {
+    height: 100vh; /* ครอบคลุมทั้งหน้าจอ */
+    width: 240px; /* กำหนดความกว้างของ Sidebar */
+    position: fixed; /* ตำแหน่งคงที่ */
+    z-index: 1;
+    top: 60;
+    left: 0;
+    background-color: #21a42e; /* เปลี่ยนพื้นหลังเป็นสีขาว */
+    box-shadow: 2px 0 5px rgb(26, 120, 17); /* เพิ่มเงาเบา ๆ เพื่อสร้างความลึก */
+    overflow-x: hidden;
+    transition: 0.3s;
+    padding-top: 20px;
+}
+
+/* ลิงก์ใน Sidebar */
+.sidebar a {
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #a08f2c; /* สีลิงก์ที่คล้ายกับ Google Classroom */
+    display: block;
+    transition: 0.3s;
+    border-radius: 4px; /* ทำให้มุมโค้งมนเล็กน้อย */
+    margin: 5px 10px;
+}
+
+/* ลิงก์เมื่อ hover */
+.sidebar a:hover {
+    background-color: #f8f9fa; /* เปลี่ยนพื้นหลังเมื่อเมาส์ชี้ */
+    color: #36b8d8; /* เปลี่ยนสีตัวอักษร */
+}
+
+/* ลิงก์ที่ถูกเลือก */
+.sidebar a.active {
+    background-color: #ffffff; /* สีพื้นหลังที่โดดเด่นเมื่อเลือก */
+    color: #eef139; /* สีตัวอักษรของลิงก์ที่ถูกเลือก */
+}
+
+/* Main content styles */
+#main {
+    margin-left: 270px; /* ปรับระยะขอบให้เหมาะสมกับ Sidebar */
+    transition: 0.3s;
+    padding: 20px;
+}
+
+.user-info {
+    text-align: center;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.user-info h1 {
+    font-size: 18px; 
+    color: #229224; 
+}
+
+.user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 0;
+        height: 100%;
+    }
+    #main {
+        margin-left: 0;
+    }
+}
+
+// ดึงข้อมูลงานที่สร้างโดยผู้ใช้ที่เข้าสู่ระบบเท่านั้น
+$query = "SELECT j.job_id, m.firstname, m.lastname, j.job_title, j.job_type, j.job_subtype, j.job_description, j.created_at
+          FROM jobs j
+          JOIN mable m ON j.id = m.id
+          WHERE j.id = ?"; // เพิ่มเงื่อนไขให้แสดงเฉพาะงานที่ถูกสร้างโดยผู้ใช้งานคนนั้น
